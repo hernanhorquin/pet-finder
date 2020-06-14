@@ -7,16 +7,15 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basemvvmexample.R
-import com.example.basemvvmexample.data.local.BreedRoom
 import com.example.basemvvmexample.ui.viewmodel.SharedViewModel
 
-class BreedRecyclerViewAdapter(
-    private var list: List<BreedRoom>,
+class PetAdapter(
+    private val list: List<String>,
     private val viewModel: ViewModel
-) : RecyclerView.Adapter<BreedRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.breed_fragment_list_item, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.sub_breed_fragment_list_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -25,16 +24,11 @@ class BreedRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = list[position].breed
-        holder.textView.setOnClickListener { (viewModel as SharedViewModel).breed(list[position].breed) }
-    }
-
-    internal fun setWords(breeds: List<BreedRoom>) {
-        this.list = breeds
-        notifyDataSetChanged()
+        holder.textView.text = list[position]
+        holder.textView.setOnClickListener { (viewModel as SharedViewModel).subBreed(list[position]) }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var textView: TextView = itemView.findViewById(R.id.breed_fragment_list_item_text)
+        var textView: TextView = itemView.findViewById(R.id.sub_breed_fragment_list_item_text)
     }
 }

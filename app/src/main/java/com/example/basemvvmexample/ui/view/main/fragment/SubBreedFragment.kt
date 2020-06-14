@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.basemvvmexample.R
 import com.example.basemvvmexample.databinding.SubBreedFragmentBinding
-import com.example.basemvvmexample.ui.adapter.SubBreedRecyclerViewAdapter
+import com.example.basemvvmexample.ui.adapter.PetAdapter
 import com.example.basemvvmexample.ui.viewmodel.SharedViewModel
 import com.example.basemvvmexample.ui.viewmodel.SubBreedViewModel
 import kotlinx.android.synthetic.main.breed_fragment.breed_fragment_recycler_view
@@ -35,7 +35,7 @@ class SubBreedFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        breed_fragment_recycler_view.adapter = SubBreedRecyclerViewAdapter(
+        breed_fragment_recycler_view.adapter = PetAdapter(
                 listOf(getString(R.string.sub_dog_1), getString(R.string.sub_dog_2), getString(R.string.sub_dog_3)),
                 sharedViewModel)
         breed_fragment_recycler_view.layoutManager = LinearLayoutManager(context)

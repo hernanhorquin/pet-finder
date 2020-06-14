@@ -16,7 +16,7 @@ class BreedViewModel(private val mainRepository: MainRepository) : BaseViewModel
     var dogBreedsLiveData: LiveData<List<BreedRoom>> = _dogBreedsLiveData
 
     init {
-        dogBreedsLiveData = mainRepository.breeds
+        //dogBreedsLiveData = mainRepository.breeds
     }
 
     fun getDogBreedsFromRepo() = liveData(Dispatchers.IO) {

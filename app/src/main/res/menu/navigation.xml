@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ids match those in nav_graph.xml -->
+    <item
+        android:id="@+id/breedFragment"
+        android:icon="@drawable/ic_menu_home"
+        android:title="Inicio" />
+    <item
+        android:id="@+id/dogGalleryFragment"
+        android:icon="@drawable/ic_baseline_pets_24"
+        android:title="Adopcion" />
+
+    <item
+        android:id="@+id/subBreedFragment"
+        android:icon="@drawable/ic_menu_profile"
+        android:title="Perfil" />
+
+
+</menu>

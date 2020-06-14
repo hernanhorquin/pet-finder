@@ -13,7 +13,7 @@ import com.example.basemvvmexample.data.api.response.DogBreedResponse
 import com.example.basemvvmexample.data.api.response.Resource
 import com.example.basemvvmexample.data.api.response.Status
 import com.example.basemvvmexample.databinding.BreedFragmentBinding
-import com.example.basemvvmexample.ui.adapter.BreedRecyclerViewAdapter
+import com.example.basemvvmexample.ui.adapter.PetAdapter
 import com.example.basemvvmexample.ui.viewmodel.BreedViewModel
 import com.example.basemvvmexample.ui.viewmodel.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -32,6 +32,7 @@ class BreedFragment : Fragment() {
             breedViewModel = this@BreedFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
             holder = this@BreedFragment
+            initRecyclerView()
         }
         return binding.root
     }
@@ -40,19 +41,19 @@ class BreedFragment : Fragment() {
         super.onStart()
         initRecyclerView()
         setUpObservers()
-        binding.breedFragmentSearch.setOnClickListener {
-            binding.breedViewModel?.getDogBreedsFromRepo()?.observe(viewLifecycleOwner, getDogBreedsObserverResponse)
-        }
+//        binding.breedFragmentSearch.setOnClickListener {
+//            binding.breedViewModel?.getDogBreedsFromRepo()?.observe(viewLifecycleOwner, getDogBreedsObserverResponse)
+//        }
     }
 
     private fun initRecyclerView() {
-        val recyclerViewAdapter = BreedRecyclerViewAdapter(emptyList(), sharedViewModel)
+        val recyclerViewAdapter = PetAdapter(listOf("Ejemplo 1", "Ejemplo 2", "Ejemplo 3", "Ejemplo 4"), sharedViewModel)
         binding.breedFragmentRecyclerView.apply {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(context)
         }
         binding.breedViewModel?.dogBreedsLiveData?.observe(viewLifecycleOwner, Observer { breeds ->
-            breeds?.let { recyclerViewAdapter.setWords(breeds) }
+            breeds?.let {  }
         })
     }
 
@@ -77,13 +78,11 @@ class BreedFragment : Fragment() {
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
         binding.breedFragmentRecyclerView.visibility = View.INVISIBLE
-        binding.breedFragmentButton.visibility = View.INVISIBLE
     }
 
     private fun hideLoading() {
         binding.progressBar.visibility = View.INVISIBLE
         binding.breedFragmentRecyclerView.visibility = View.VISIBLE
-        binding.breedFragmentButton.visibility = View.VISIBLE
     }
 
     fun execAction() = NavHostFragment.findNavController(this).navigate(R.id.action_breedFragment_to_subBreedFragment)

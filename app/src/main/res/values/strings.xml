@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseMVVMKotlinExample</string>
+    <string name="app_name">Pet Finder</string>
     <string name="button_next">next</string>
     <string name="sub_dog_1">sub_dog_1</string>
     <string name="sub_dog_2">sub_dog_2</string>
@@ -14,4 +14,5 @@
     <string name="text">TextView</string>
     <string name="breed">Breed</string>
     <string name="sub_breed">Sub_Breed</string>
+    <string name="searchPreferences">Busquedas por preferencias</string>
 </resources>
