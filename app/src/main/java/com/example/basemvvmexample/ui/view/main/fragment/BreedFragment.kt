@@ -32,14 +32,17 @@ class BreedFragment : Fragment() {
             breedViewModel = this@BreedFragment.viewModel
             lifecycleOwner = viewLifecycleOwner
             holder = this@BreedFragment
-            initRecyclerView()
         }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+        setUpObservers()
+    }
     override fun onStart() {
         super.onStart()
-        initRecyclerView()
         setUpObservers()
 //        binding.breedFragmentSearch.setOnClickListener {
 //            binding.breedViewModel?.getDogBreedsFromRepo()?.observe(viewLifecycleOwner, getDogBreedsObserverResponse)
