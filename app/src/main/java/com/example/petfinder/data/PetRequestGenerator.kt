@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PetRequestGenerator {
 
-    private val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
+    private val BASE_URL = "http://192.168.0.211:3000/auth/"
 
     private val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
         val defaultRequest = chain.request()
