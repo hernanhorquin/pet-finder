@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
     android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
     android:layout_marginEnd="24dp"
+    android:layout_marginBottom="12dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="#fafafa"
     app:cardCornerRadius="12dp"
@@ -23,22 +23,21 @@
             android:layout_height="100dp"
             android:layout_margin="12dp"
             android:backgroundTint="@android:color/transparent"
-            app:civ_circle_background_color="@android:color/transparent"
             android:elevation="4dp"
+            app:civ_circle_background_color="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/pet_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pet_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Ejemplo 1" />
@@ -49,22 +48,32 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:maxLines="1"
-            android:text="10 years"
+            android:text="10 años"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/pet_name" />
 
         <TextView
+            android:id="@+id/publish_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:text="30/04/2021"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pet_name" />
+
+        <TextView
             android:id="@+id/pet_gender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:maxLines="1"
-            android:text="FEMALE"
+            android:text="Macho"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/pet_years"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/pet_years" />
+            app:layout_constraintBottom_toTopOf="@+id/pet_years"
+            app:layout_constraintStart_toStartOf="@id/pet_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

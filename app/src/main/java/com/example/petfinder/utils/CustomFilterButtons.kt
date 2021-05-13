@@ -19,6 +19,8 @@ class CustomFilterButtons(context: Context?, attributes: AttributeSet? = null) :
     private var isDogsBtnSelected = false
     private var isCatsBtnSelected = false
 
+    var actualSelected = ""
+
 
     private var listener: FilterButtonsHandler? = null
 
@@ -61,7 +63,16 @@ class CustomFilterButtons(context: Context?, attributes: AttributeSet? = null) :
     fun updateUI(selected: String) {
         when(selected) {
             "ALL" -> {
+                if (isDogsBtnSelected) {
+                    isDogsBtnSelected = false
+                    dogsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
+                if (isCatsBtnSelected) {
+                    isCatsBtnSelected = false
+                    catsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
                 if (!isAllPetsBtnSelected) {
+                    actualSelected = "a"
                     isAllPetsBtnSelected = true
                     allPetsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.tab_background_selected))
                 }
@@ -71,7 +82,16 @@ class CustomFilterButtons(context: Context?, attributes: AttributeSet? = null) :
                 }
             }
             "DOGS" -> {
+                if(isAllPetsBtnSelected) {
+                    isAllPetsBtnSelected = false
+                    allPetsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
+                if (isCatsBtnSelected) {
+                    isCatsBtnSelected = false
+                    catsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
                 if (!isDogsBtnSelected) {
+                    actualSelected = "d"
                     isDogsBtnSelected = true
                     dogsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.tab_background_selected))
                 }
@@ -81,7 +101,16 @@ class CustomFilterButtons(context: Context?, attributes: AttributeSet? = null) :
                 }
             }
             "CATS" -> {
+                if(isAllPetsBtnSelected) {
+                    isAllPetsBtnSelected = false
+                    allPetsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
+                if (isDogsBtnSelected) {
+                    isDogsBtnSelected = false
+                    dogsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.filter_btn_background))
+                }
                 if (!isCatsBtnSelected){
+                    actualSelected = "c"
                     isCatsBtnSelected = true
                     catsBtn.setCardBackgroundColor(ContextCompat.getColor(context, R.color.tab_background_selected))
                 }

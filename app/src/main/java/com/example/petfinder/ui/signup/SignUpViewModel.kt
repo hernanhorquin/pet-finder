@@ -1,4 +1,4 @@
-package com.example.petfinder.ui.login
+package com.example.petfinder.ui.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,23 +13,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SignInViewModel : ViewModel() {
+class SignUpViewModel: ViewModel() {
 
     private val petRepository: PetRepository = PetRepositoryImpl()
 
-    private var _logIn = MutableLiveData<Data<Boolean>>()
-    val logIn: LiveData<Data<Boolean>>
-        get() = _logIn
+    private var _signUp = MutableLiveData<Data<Boolean>>()
+    val signUp: LiveData<Data<Boolean>>
+        get() = _signUp
 
-    fun logIn(username: String, password: String) = viewModelScope.launch {
-        _logIn.postValue(Data(responseType = Status.LOADING))
+    fun signUp(email: String, password: String, firstName: String, lastName: String, cellphone: String, address: String) = viewModelScope.launch {
+        _signUp.postValue(Data(responseType = Status.LOADING))
         when (val result =
-            withContext(Dispatchers.IO) { petRepository.logIn(username, password) }) {
+            withContext(Dispatchers.IO) { petRepository.signUp(email, password, firstName, lastName, cellphone, address) }) {
             is Result.Failure -> {
-                _logIn.postValue(Data(responseType = Status.ERROR, error = result.exception))
+                _signUp.postValue(Data(responseType = Status.ERROR, error = result.exception))
             }
             is Result.Success -> {
-                _logIn.postValue(Data(responseType = Status.SUCCESSFUL, data = result.data))
+                _signUp.postValue(Data(responseType = Status.SUCCESSFUL, data = result.data))
             }
         }
     }

@@ -11,9 +11,10 @@ import com.example.petfinder.data.model.Pet
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PetAdapter(
-    private val list: List<Pet>,
     private val onPetClickListener: (Pet) -> Unit
 ) : RecyclerView.Adapter<PetAdapter.ViewHolder>() {
+
+    var list: MutableList<Pet> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.sub_breed_fragment_list_item, parent, false)
@@ -26,6 +27,12 @@ class PetAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(list[position])
+    }
+
+    fun update(filterList: List<Pet>) {
+        list.clear()
+        list.addAll(filterList)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View, onPetClickListener: (Pet) -> Unit) : RecyclerView.ViewHolder(itemView) {

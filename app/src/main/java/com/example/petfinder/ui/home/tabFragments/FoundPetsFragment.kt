@@ -16,20 +16,15 @@ class FoundPetsFragment : Fragment() {
 
     private lateinit var binding: FragmentFoundPetsBinding
 
-    val listener: CustomFilterButtons.FilterButtonsHandler = object : CustomFilterButtons.FilterButtonsHandler {
-        override fun setOnAllPetsClickListener() {
-            binding.filterLinear.updateUI("ALL")
-        }
-
-        override fun setOnDogsClickListener() {
-            binding.filterLinear.updateUI("DOGS")
-        }
-
-        override fun setOnCatsClickListener() {
-            binding.filterLinear.updateUI("CATS")
-        }
-
+    var recyclerViewAdapter: PetAdapter = PetAdapter() {
+        NavigationHelper().goToDetailActivity(requireActivity(), it)
     }
+
+    var listaDelBackend = listOf(
+        Pet("1", "1", "Pancho", null, null, null, null, null, null, null, null, null, "c"),
+        Pet("1", "1", "Juancho", null, null, null, null, null, null, null, null, null, "d"),
+        Pet("1", "1", "Chacho", null, null, null, null, null, null, null, null, null, "c")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +48,59 @@ class FoundPetsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        val recyclerViewAdapter = PetAdapter(
-            listOf(
-                Pet("1", "1", "Pancho", null, null, null, null, null, null, null, null, null),
-                Pet("1", "1", "Juancho", null, null, null, null, null, null, null, null, null),
-                Pet("1", "1", "Chacho", null, null, null, null, null, null, null, null, null)
-            )
-        ) {
-            NavigationHelper().goToDetailActivity(requireActivity(), it)
-        }
+        recyclerViewAdapter.update(listaDelBackend)
         binding.foundPetRecycler.apply {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    val listener: CustomFilterButtons.FilterButtonsHandler =
+        object : CustomFilterButtons.FilterButtonsHandler {
+            override fun setOnAllPetsClickListener() {
+                resetFilter()
+                binding.filterLinear.updateUI("ALL")
+            }
+
+            override fun setOnDogsClickListener() {
+
+                if (binding.filterLinear.actualSelected == "d") {
+                    resetFilter()
+                    binding.filterLinear.actualSelected = "a"
+                } else
+                    binding.foundPetRecycler.apply {
+                        recyclerViewAdapter.update(listaDelBackend.filter {
+                            it.catOrDog == "d"
+                        })
+                        adapter = recyclerViewAdapter
+                    }
+                binding.filterLinear.updateUI("DOGS")
+
+            }
+
+            override fun setOnCatsClickListener() {
+                if (binding.filterLinear.actualSelected == "c") {
+                    resetFilter()
+                    binding.filterLinear.actualSelected = "a"
+                } else
+                    binding.foundPetRecycler.apply {
+                        recyclerViewAdapter.update(listaDelBackend.filter {
+                            it.catOrDog == "c"
+                        })
+                        adapter = recyclerViewAdapter
+                    }
+                binding.filterLinear.updateUI("CATS")
+
+            }
+
+        }
+
+    private fun resetFilter() {
+        binding.foundPetRecycler.apply {
+            recyclerViewAdapter.update(listaDelBackend.filter {
+                it.catOrDog == "c" || it.catOrDog == "d"
+            })
+            adapter = recyclerViewAdapter
         }
     }
 

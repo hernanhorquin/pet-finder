@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="Nombre de usuario"
+            android:text="Email"
             android:textColor="@color/purple_700"
             android:textSize="12sp"/>
 
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="Iniciar Sesion"
+        android:text="Iniciar Sesión"
         app:layout_constraintBottom_toTopOf="@id/sign_up_button"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintStart_toStartOf="@id/left_guideline" />

@@ -17,11 +17,13 @@ data class Pet(
     val lostDate: String?,
     val city: String?,
     val hood: String?,
-    val breed: String?
+    val breed: String?,
+    val catOrDog: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
