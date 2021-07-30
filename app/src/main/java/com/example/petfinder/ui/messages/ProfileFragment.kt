@@ -10,10 +10,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.petfinder.databinding.FragmentMessagesBinding
 import com.example.petfinder.utils.loadImage
@@ -55,6 +58,10 @@ class ProfileFragment : Fragment() {
                 //system OS is < Marshmallow
                 pickImageFromGallery()
             }
+        }
+        binding.userDataRecycler.layoutManager = LinearLayoutManager(context)
+        binding.userDataRecycler.adapter = StringAdapter().apply {
+            this.update(listOf("Hernan Horquin", "Mar del Plata", "02/06/1996"))
         }
 
         Glide.with(this)
