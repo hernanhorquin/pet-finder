@@ -23,7 +23,11 @@ class LostPetsFragment : Fragment() {
     var listaDelBackend = listOf(
         Pet("1", "1", "Pancho", null, null, null, null, null, null, null, null, null, "c"),
         Pet("1", "1", "Juancho", null, null, null, null, null, null, null, null, null, "d"),
-        Pet("1", "1", "Chacho", null, null, null, null, null, null, null, null, null, "c")
+        Pet("1", "1", "Chacho", null, null, null, null, null, null, null, null, null, "c"),
+        Pet("1", "1", "Pancho", null, null, null, null, null, null, null, null, null, "c"),
+        Pet("1", "1", "Juancho", null, null, null, null, null, null, null, null, null, "d"),
+        Pet("1", "1", "Pancho", null, null, null, null, null, null, null, null, null, "c"),
+        Pet("1", "1", "Juancho", null, null, null, null, null, null, null, null, null, "d")
     )
 
 
