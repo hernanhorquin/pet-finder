@@ -4,11 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.example.kitchen_recipes.ui.utils.Status
 import com.example.petfinder.MainActivity
 import com.example.petfinder.databinding.ActivitySignInBinding
 import com.example.petfinder.ui.signup.SignUpActivity
+import com.example.petfinder.utils.SharedPreferencesHelper
 
 class SignInActivity : AppCompatActivity() {
 
@@ -21,9 +21,6 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        if (getLoginSharedPreferences())
-//            startActivity(Intent(this, MainActivity::class.java))
 
         setUpListeners()
     }
@@ -60,17 +57,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun setLoginSharedPreferences() {
-        val sharedPreferences = this.getPreferences(MODE_PRIVATE)
-        sharedPreferences.edit()
-            .putBoolean("SHARED_PREFERENCES_KEEP_SESSION", true)
-            .apply()
-    }
-
-    private fun getLoginSharedPreferences(): Boolean {
-        return this.getPreferences(MODE_PRIVATE).getBoolean(
-            "SHARED_PREFERENCES_KEEP_SESSION",
-            false
-        )
+        SharedPreferencesHelper.getInstance(this).apply {
+            this.saveSession(true)
+        }
     }
 
     private fun allFieldsCompleted(): Boolean {

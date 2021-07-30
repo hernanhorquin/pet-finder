@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.petfinder.databinding.FragmentMessagesBinding
+import com.example.petfinder.utils.SharedPreferencesHelper
 import com.example.petfinder.utils.loadImage
 import java.io.File
 
@@ -62,6 +63,10 @@ class ProfileFragment : Fragment() {
         binding.userDataRecycler.layoutManager = LinearLayoutManager(context)
         binding.userDataRecycler.adapter = StringAdapter().apply {
             this.update(listOf("Hernan Horquin", "Mar del Plata", "02/06/1996"))
+        }
+
+        binding.logOutBtn.setOnClickListener {
+            SharedPreferencesHelper.getInstance(requireContext()).clearAll()
         }
 
         Glide.with(this)

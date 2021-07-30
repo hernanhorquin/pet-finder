@@ -2,34 +2,39 @@ package com.example.petfinder.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.app.Activity
 
-class SharedPreferencesHelper {
+class SharedPreferencesHelper private constructor() {
 
-    private val SHARED_PREFERENCES_PACKAGE = "asd"
+    companion object {
+        private val sharePref = SharedPreferencesHelper()
+        private lateinit var sharedPreferences: SharedPreferences
 
-    //Login
-    private val SHARED_PREFERENCES_KEEP_SESSION = "SHARED_PREFERENCES_KEEP_SESSION"
+        private const val KEEP_SESSION = "SHARED_PREFERENCES_KEEP_SESSION"
 
-    private var sharedPreferences: SharedPreferences? = null
-
-    fun SharedPreferencesHelper(context: Context) {
-        sharedPreferences = context.getSharedPreferences(
-            SHARED_PREFERENCES_PACKAGE,
-            Context.MODE_PRIVATE
-        )
+        fun getInstance(context: Context): SharedPreferencesHelper {
+            if (!::sharedPreferences.isInitialized) {
+                synchronized(SharedPreferencesHelper::class.java) {
+                    if (!::sharedPreferences.isInitialized) {
+                        sharedPreferences =
+                            context.getSharedPreferences(context.packageName, Activity.MODE_PRIVATE)
+                    }
+                }
+            }
+            return sharePref
+        }
     }
 
-    fun setKeepSession(keepSession: Boolean) {
-        sharedPreferences!!.edit()
-            .putBoolean(SHARED_PREFERENCES_KEEP_SESSION, keepSession)
+    val isSessionLogged: Boolean
+        get() = sharedPreferences.getBoolean(KEEP_SESSION, false)
+
+    fun saveSession(session: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(KEEP_SESSION, session)
             .apply()
     }
 
-    fun keepSession(): Boolean {
-        return sharedPreferences!!.getBoolean(
-            SHARED_PREFERENCES_KEEP_SESSION,
-            true
-        )
+    fun clearAll() {
+        sharedPreferences.edit().clear().apply()
     }
-
 }
