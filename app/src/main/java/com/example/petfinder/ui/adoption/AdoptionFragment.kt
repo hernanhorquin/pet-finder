@@ -1,5 +1,6 @@
 package com.example.petfinder.ui.adoption
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petfinder.data.model.Pet
 import com.example.petfinder.databinding.FragmentAdoptionBinding
+import com.example.petfinder.ui.PublishPetActivity
 import com.example.petfinder.ui.adapter.PetAdapter
 import com.example.petfinder.utils.CustomFilterButtons
 import com.example.petfinder.utils.NavigationHelper
@@ -43,6 +45,11 @@ class AdoptionFragment : Fragment() {
             activity?.actionBar?.title = Html.fromHtml("<font color='#43CBDB'>Pet Finder </font>")
             initRecyclerView()
         }
+
+        binding.publishPet.setOnClickListener {
+            startActivity(Intent(context, PublishPetActivity::class.java))
+        }
+
         return binding.root
     }
 

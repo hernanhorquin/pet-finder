@@ -1,5 +1,6 @@
 package com.example.petfinder.ui.home.tabFragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petfinder.data.model.Pet
 import com.example.petfinder.databinding.FragmentFoundPetsBinding
+import com.example.petfinder.ui.PublishPetActivity
 import com.example.petfinder.ui.adapter.PetAdapter
 import com.example.petfinder.utils.CustomFilterButtons
 import com.example.petfinder.utils.NavigationHelper
@@ -42,6 +44,10 @@ class FoundPetsFragment : Fragment() {
 
         binding.apply {
             initRecyclerView()
+        }
+
+        binding.publishPet.setOnClickListener {
+            startActivity(Intent(context, PublishPetActivity::class.java))
         }
 
         return binding.root
