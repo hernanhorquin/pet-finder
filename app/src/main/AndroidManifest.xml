@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetFinder"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.filter.FilterActivity"></activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -28,8 +29,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ui.login.SignInActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".ui.detail.PetDetailActivity" />
         <activity
             android:name=".MainActivity"

@@ -11,6 +11,7 @@ import com.example.petfinder.data.model.Pet
 import com.example.petfinder.databinding.FragmentLostPetsBinding
 import com.example.petfinder.ui.PublishPetActivity
 import com.example.petfinder.ui.adapter.PetAdapter
+import com.example.petfinder.ui.filter.FilterActivity
 import com.example.petfinder.utils.CustomFilterButtons
 import com.example.petfinder.utils.NavigationHelper
 
@@ -53,6 +54,11 @@ class LostPetsFragment : Fragment() {
         binding.publishPet.setOnClickListener {
             startActivity(Intent(context, PublishPetActivity::class.java))
         }
+
+        binding.filterBtn.setOnClickListener {
+            startActivity(Intent(context, FilterActivity::class.java))
+        }
+
         return binding.root
     }
 
