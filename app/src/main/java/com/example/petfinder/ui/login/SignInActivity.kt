@@ -4,17 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import com.example.kitchen_recipes.ui.utils.Status
 import com.example.petfinder.MainActivity
 import com.example.petfinder.databinding.ActivitySignInBinding
 import com.example.petfinder.ui.signup.SignUpActivity
 import com.example.petfinder.utils.SharedPreferencesHelper
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
 
-    private var viewModel = SignInViewModel()
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

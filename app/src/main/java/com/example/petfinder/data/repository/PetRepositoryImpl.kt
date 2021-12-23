@@ -5,10 +5,10 @@ import com.example.petfinder.data.PetRequestGenerator
 import com.example.petfinder.data.api.PetApi
 import com.example.petfinder.data.model.Pet
 import com.example.petfinder.data.model.SignUpRequest
+import javax.inject.Inject
 
-class PetRepositoryImpl : PetRepository {
-
-    private val apiService = PetRequestGenerator()
+class PetRepositoryImpl @Inject constructor(private val apiService: PetRequestGenerator) :
+    PetRepository {
 
     override fun logIn(username: String, password: String): Result<Boolean> {
         val callResponse = apiService.createService(PetApi::class.java)
@@ -26,7 +26,14 @@ class PetRepositoryImpl : PetRepository {
         return Result.Failure(Exception("BAD_REQUEST"))
     }
 
-    override fun signUp(email: String, password: String, firstName: String, lastName: String, cellphone: String, address: String): Result<Boolean> {
+    override fun signUp(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String,
+        cellphone: String,
+        address: String
+    ): Result<Boolean> {
         val callResponse = apiService.createService(PetApi::class.java)
             .signUp(SignUpRequest(firstName, lastName, email, password, cellphone, address))
         val response = callResponse.execute()

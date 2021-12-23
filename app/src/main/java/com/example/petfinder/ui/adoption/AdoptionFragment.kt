@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petfinder.data.model.Pet
@@ -16,10 +17,12 @@ import com.example.petfinder.ui.adapter.PetAdapter
 import com.example.petfinder.ui.filter.FilterActivity
 import com.example.petfinder.utils.CustomFilterButtons
 import com.example.petfinder.utils.NavigationHelper
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AdoptionFragment : Fragment() {
 
-    private lateinit var adoptionViewModel: AdoptionViewModel
+    private val adoptionViewModel: AdoptionViewModel by viewModels()
     private lateinit var binding: FragmentAdoptionBinding
 
     var recyclerViewAdapter: PetAdapter = PetAdapter() {
@@ -38,7 +41,7 @@ class AdoptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adoptionViewModel = ViewModelProvider(this).get(AdoptionViewModel::class.java)
+        //adoptionViewModel = ViewModelProvider(this).get(AdoptionViewModel::class.java)
         binding = FragmentAdoptionBinding.inflate(layoutInflater)
         binding.filterLinear.setEventHandler(listener)
 

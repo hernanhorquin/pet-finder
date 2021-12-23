@@ -8,14 +8,14 @@ import com.example.kitchen_recipes.ui.utils.Data
 import com.example.kitchen_recipes.ui.utils.Result
 import com.example.kitchen_recipes.ui.utils.Status
 import com.example.petfinder.data.repository.PetRepository
-import com.example.petfinder.data.repository.PetRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class SignUpViewModel: ViewModel() {
-
-    private val petRepository: PetRepository = PetRepositoryImpl()
+@HiltViewModel
+class SignUpViewModel @Inject constructor(private val petRepository: PetRepository): ViewModel() {
 
     private var _signUp = MutableLiveData<Data<Boolean>>()
     val signUp: LiveData<Data<Boolean>>

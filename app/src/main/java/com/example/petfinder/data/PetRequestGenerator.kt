@@ -9,27 +9,29 @@ class PetRequestGenerator {
 
     private val BASE_URL = "https://fathomless-fortress-88513.herokuapp.com/"
 
-    private val httpClient = OkHttpClient.Builder()
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10, TimeUnit.SECONDS)
-        .writeTimeout(10, TimeUnit.SECONDS)
-        .addInterceptor { chain ->
-        val defaultRequest = chain.request()
+    private val retrofit: Retrofit
 
-        val defaulthttpUrl = defaultRequest.url()
-        val httpUrl = defaulthttpUrl.newBuilder()
+    init {
+        retrofit = Retrofit.Builder()
+            .client(createHttpClient())
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
-
-        val requestBuilder = defaultRequest.newBuilder().url(httpUrl)
-        chain.proceed(requestBuilder.build())
     }
 
-    val builder = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+    private fun createHttpClient(): OkHttpClient {
 
-    fun <S> createService(serviceClass: Class<S>): S {
-        val retrofit = builder.client(httpClient.build()).build()
-        return retrofit.create(serviceClass)
+
+        val httpClient = OkHttpClient.Builder()
+
+        httpClient.connectTimeout(60L, TimeUnit.SECONDS)
+        httpClient.readTimeout(60L, TimeUnit.SECONDS)
+        httpClient.writeTimeout(60L, TimeUnit.SECONDS)
+
+        return httpClient.build()
+    }
+
+    fun <T> createService(clazz: Class<T>): T {
+        return retrofit.create(clazz)
     }
 }
